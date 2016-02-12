@@ -4,11 +4,33 @@
   */
 
 object Adder {
-  def subtraction(a:Long, b:Long) = {
+
+  def main(args: Array[String]) {
+
+    args.toList match {
+      case "+"::next::rest => println(addition((next::rest).map(_.toLong):_*))
+      case "-"::next::rest => println(subtraction((next::rest).map(_.toLong):_*))
+      case _ => {
+        Console.err.println("Usage: +|- num [num]")
+        System.exit(1)
+      }
+    }
+    System.exit(0)
+  }
+
+  def addition(a:Long*) = {
+    a.reduce(binary_addition)
+  }
+
+  def subtraction(a:Long*) = {
+    a.reduce(binary_subtraction)
+  }
+
+  private def binary_subtraction(a:Long, b:Long) = {
     addition(a, b * -1)
   }
 
-  def binary_addition(a:Long, b:Long) = {
+  private def binary_addition(a:Long, b:Long) = {
     def _inner(a:Char, b:Char, carryIn:Char):(Char,Char) =  {
       (a, b, carryIn) match {
         case ('1', '1', '1') => ('1', '1')
@@ -33,9 +55,6 @@ object Adder {
     BigInt((if (b > 0) result :+ carryOut else result).reverse.mkString, 2).toLong
   }
 
-  def addition(a:Long*) = {
-    a.reduce(binary_addition)
-  }
 }
 
 

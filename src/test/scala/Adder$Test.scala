@@ -27,6 +27,10 @@ class Adder$Test extends org.scalatest.FunSuite {
     assert(Adder.addition(0, 0) == 0)
   }
 
+  test("Adding single number") {
+    assert(Adder.addition(100) == 100)
+  }
+
   test("Subtracting two numbers") {
     assert(Adder.subtraction(1, 1) == 1 - 1)
   }
@@ -47,4 +51,15 @@ class Adder$Test extends org.scalatest.FunSuite {
     assert(Adder.subtraction(0, 0) == 0)
   }
 
+  test("Subtracting multiple numbers") {
+    assert(Adder.subtraction(100, 100, 101) == -101)
+  }
+
+  test("Subtracting multiple numbers with negative") {
+    assert(Adder.subtraction(100, 100, -101) == 100 - 100 - -101)
+  }
+
+  test("Subtracting single number") {
+    assert(Adder.subtraction(100) == 100)
+  }
 }
